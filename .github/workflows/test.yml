@@ -1,0 +1,42 @@
+name: test_dashlane_action
+
+on: push
+
+jobs:
+  test_action:
+    name: Load secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load secrets
+        id: load_secrets
+        uses: ./ # Dashlane/github-action@<version>
+        env:
+          ACTION_SECRET_PASSWORD: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/password
+          ACTION_SECRET_NOTE: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/note
+          DASHLANE_DEVICE_ACCESS_KEY: ${{ secrets.DASHLANE_DEVICE_ACCESS_KEY }}
+          DASHLANE_DEVICE_SECRET_KEY: ${{ secrets.DASHLANE_DEVICE_SECRET_KEY }}
+          DASHLANE_LOGIN: ${{ secrets.DASHLANE_LOGIN }}
+          DASHLANE_MASTER_PASSWORD: ${{ secrets.DASHLANE_MASTER_PASSWORD }}
+      - name: test secret values
+        env:
+          ACTION_SECRET_PASSWORD: ${{ steps.load_secrets.outputs.ACTION_SECRET_PASSWORD }}
+          ACTION_SECRET_NOTE: ${{ steps.load_secrets.outputs.ACTION_SECRET_NOTE }}
+        run: ./test/test.sh
+  test_action_no_entries:
+    name: Load secrets - no entries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load secrets
+        id: load_secrets
+        uses: ./ # Dashlane/github-action@<version>
+        env:
+          DASHLANE_DEVICE_ACCESS_KEY: ${{ secrets.DASHLANE_DEVICE_ACCESS_KEY }}
+          DASHLANE_DEVICE_SECRET_KEY: ${{ secrets.DASHLANE_DEVICE_SECRET_KEY }}
+          DASHLANE_LOGIN: ${{ secrets.DASHLANE_LOGIN }}
+          DASHLANE_MASTER_PASSWORD: ${{ secrets.DASHLANE_MASTER_PASSWORD }}
+      - name: Test with no entries
+        env:
+          ACTION_SECRET_PASSWORD: ${{ steps.load_secrets.outputs.ACTION_SECRET_PASSWORD }}
+        run: ./test/test_no_entries.sh
