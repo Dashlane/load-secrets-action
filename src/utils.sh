@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 echoError() {
@@ -48,10 +49,10 @@ install_cli() {
             exit 1
         fi
 
-        curl -sSfLo dcli  https://github.com/Dashlane/dashlane-cli/releases/download/v6.2405.0/dcli-linux-x64
+        curl -sSfLo dcli https://github.com/Dashlane/dashlane-cli/releases/download/v6.2405.0/dcli-linux-x64
 
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        curl -sSfLo dcli  https://github.com/Dashlane/dashlane-cli/releases/download/v6.2405.0/dcli-macos-arm64
+        curl -sSfLo dcli https://github.com/Dashlane/dashlane-cli/releases/download/v6.2405.0/dcli-macos-arm64
     else
         echoError "Operating system not supported yet for this GitHub Action: $OSTYPE."
         exit 1
@@ -62,7 +63,7 @@ install_cli() {
     chmod +x ./dcli
 }
 
-read_secrets() { 
+read_secrets() {
 
     env_variables=$(printenv | sed 's;=.*;;' | sort)
 
@@ -76,13 +77,12 @@ read_secrets() {
         if [[ "${!path}" =~ dl://* ]]; then
             is_dashlane_vault_path_found=1
             echo "reading $path"
-            echo "$path=$(./dcli read ${!path})" >> "$GITHUB_OUTPUT"
+            echo "$path=$(./dcli read "${!path}")" >>"$GITHUB_OUTPUT"
         fi
     done
 
     if [ $is_dashlane_vault_path_found == 0 ]; then
-        echoError "No dashlane vault path has been found" 
+        echoError "No dashlane vault path has been found"
         exit 0
     fi
 }
-

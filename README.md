@@ -1,13 +1,13 @@
-# Dashlane CLI Action
+# Dashlane Load Secrets Action
 
 ## About
 
-`dashlane-cli-action` is built using `Dashlane CLI` and `Github Actions`. It allows developers to inject their secrets vault from Dashlane to their github workfow.
+`load-secrets-action` is built using `Dashlane CLI` and `Github Actions`. It allows developers to inject their secrets vault from Dashlane to their github workfow.
 
 ## Requirements
 
-- `Dashlane CLI`for device registration
-- `Node.js` and `npm`to run the project locally
+-   `Dashlane CLI`for device registration
+-   `Node.js` and `npm`to run the project locally
 
 ## How to run this project locally
 
@@ -41,17 +41,17 @@ For more details refer to Dashlane CLI documentation https://dashlane.github.io/
 
 ```yml
 steps:
-  - uses: actions/checkout@v2
-  - name: Load secrets
-    id: load_secrets
-    uses: ./ # Dashlane/github-action@<version>
-    env:
-      ACTION_SECRET_PASSWORD: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/password
-      ACTION_SECRET_NOTE: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/note
-      DASHLANE_DEVICE_ACCESS_KEY: ${{ secrets.DASHLANE_DEVICE_ACCESS_KEY }}
-      DASHLANE_DEVICE_SECRET_KEY: ${{ secrets.DASHLANE_DEVICE_SECRET_KEY }}
-      DASHLANE_LOGIN: ${{ secrets.DASHLANE_LOGIN }}
-      DASHLANE_MASTER_PASSWORD: ${{ secrets.DASHLANE_MASTER_PASSWORD }}
+    - uses: actions/checkout@v2
+    - name: Load secrets
+      id: load_secrets
+      uses: ./ # Dashlane/github-action@<version>
+      env:
+          ACTION_SECRET_PASSWORD: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/password
+          ACTION_SECRET_NOTE: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/note
+          DASHLANE_DEVICE_ACCESS_KEY: ${{ secrets.DASHLANE_DEVICE_ACCESS_KEY }}
+          DASHLANE_DEVICE_SECRET_KEY: ${{ secrets.DASHLANE_DEVICE_SECRET_KEY }}
+          DASHLANE_LOGIN: ${{ secrets.DASHLANE_LOGIN }}
+          DASHLANE_MASTER_PASSWORD: ${{ secrets.DASHLANE_MASTER_PASSWORD }}
 ```
 
 4- Retrieve your secrets in any next step of your pipeline using `GITHUB_OUTPUT`
