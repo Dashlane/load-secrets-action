@@ -1,9 +1,9 @@
 name: Load secrets from Dashlane
-description: Makes it possible to inject secrets from your vault in a CI using the Dashlane CLI.
+description: Inject secrets from your vault in a CI using the Dashlane CLI.
 author: Dashlane
 branding:
-  icon: key
-  color: grey
+    icon: lock
+    color: orange
 runs:
-  using: node20
-  main: dist/index.js
+    using: node20
+    main: dist/index.js
