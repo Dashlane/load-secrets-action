@@ -20,10 +20,7 @@ jobs:
               env:
                   ACTION_SECRET_PASSWORD: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/password
                   ACTION_SECRET_NOTE: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/note
-                  DASHLANE_DEVICE_ACCESS_KEY: ${{ secrets.DASHLANE_DEVICE_ACCESS_KEY }}
-                  DASHLANE_DEVICE_SECRET_KEY: ${{ secrets.DASHLANE_DEVICE_SECRET_KEY }}
-                  DASHLANE_LOGIN: ${{ secrets.DASHLANE_LOGIN }}
-                  DASHLANE_MASTER_PASSWORD: ${{ secrets.DASHLANE_MASTER_PASSWORD }}
+                  DASHLANE_SERVICE_DEVICE_KEYS: ${{ secrets.DASHLANE_SERVICE_DEVICE_KEYS }}
             - name: test secret values
               env:
                   ACTION_SECRET_PASSWORD: ${{ steps.load_secrets.outputs.ACTION_SECRET_PASSWORD }}
@@ -39,10 +36,7 @@ jobs:
               id: load_secrets
               uses: ./ # Dashlane/load-secrets-action@<version>
               env:
-                  DASHLANE_DEVICE_ACCESS_KEY: ${{ secrets.DASHLANE_DEVICE_ACCESS_KEY }}
-                  DASHLANE_DEVICE_SECRET_KEY: ${{ secrets.DASHLANE_DEVICE_SECRET_KEY }}
-                  DASHLANE_LOGIN: ${{ secrets.DASHLANE_LOGIN }}
-                  DASHLANE_MASTER_PASSWORD: ${{ secrets.DASHLANE_MASTER_PASSWORD }}
+                  DASHLANE_SERVICE_DEVICE_KEYS: ${{ secrets.DASHLANE_SERVICE_DEVICE_KEYS }}
             - name: Test with no entries
               env:
                   ACTION_SECRET_PASSWORD: ${{ steps.load_secrets.outputs.ACTION_SECRET_PASSWORD }}

@@ -15,23 +15,8 @@ check_credentials() {
     # Check all Dashlane and access keys are provided
     # Make them available to the current step through env vari
 
-    if [ -z "$DASHLANE_DEVICE_ACCESS_KEY" ]; then
-        echoError "DASHLANE_DEVICE_ACCESS_KEY is missing"
-        exit 1
-    fi
-
-    if [ -z "$DASHLANE_DEVICE_SECRET_KEY" ]; then
-        echoError "DASHLANE_DEVICE_SECRET_KEY is missing"
-        exit 1
-    fi
-
-    if [ -z "$DASHLANE_LOGIN" ]; then
-        echoError "DASHLANE_LOGIN is missing"
-        exit 1
-    fi
-
-    if [ -z "$DASHLANE_MASTER_PASSWORD" ]; then
-        echoError "DASHLANE_MASTER_PASSWORD is missing"
+    if [ -z "$DASHLANE_SERVICE_DEVICE_KEYS" ]; then
+        echoError "DASHLANE_SERVICE_DEVICE_KEYS is missing"
         exit 1
     fi
 
@@ -49,10 +34,10 @@ install_cli() {
             exit 1
         fi
 
-        curl -sSfLo dcli https://github.com/Dashlane/dashlane-cli/releases/download/v6.2405.0/dcli-linux-x64
+        curl -sSfLo dcli https://github.com/Dashlane/dashlane-cli/releases/download/v6.2421.0/dcli-linux-x64
 
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        curl -sSfLo dcli https://github.com/Dashlane/dashlane-cli/releases/download/v6.2405.0/dcli-macos-arm64
+        curl -sSfLo dcli https://github.com/Dashlane/dashlane-cli/releases/download/v6.2421.0/dcli-macos-arm64
     else
         echoError "Operating system not supported yet for this GitHub Action: $OSTYPE."
         exit 1
