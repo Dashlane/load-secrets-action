@@ -18,8 +18,8 @@ jobs:
               id: load_secrets
               uses: ./ # Dashlane/load-secrets-action@<version>
               env:
-                  ACTION_SECRET_PASSWORD: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/password
-                  ACTION_SECRET_NOTE: dl://918E3113-CA48-4642-8FAF-CE832BDED6BE/note
+                  ACTION_SECRET_PASSWORD: dl://4471025F-97BF-4FE0-B344-90CE2FBCF924/password
+                  ACTION_SECRET_NOTE: dl://63E11E5F-75FE-4BC7-9C9A-3D394FD20243/content
                   DASHLANE_SERVICE_DEVICE_KEYS: ${{ secrets.DASHLANE_SERVICE_DEVICE_KEYS }}
             - name: test secret values
               env:
